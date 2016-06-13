@@ -48,7 +48,20 @@ public class EventReceiver : MonoBehavour
 }
 ```
 
+or you can just simple style render.
+
+```
+using Unibus;
+
+public class EventReceiver : MonoBehavour
+{
+    void OnEnable()
+    {
+        Bus.Instance.AdddEnableTo((string message) => { this.GetComponent<Text>().text = message; });
+    }
+}
+```
+
 # License
 
 [MIT](./LICENSE.md)
-
