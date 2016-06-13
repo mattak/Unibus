@@ -10,16 +10,6 @@ public class ObserverText : MonoBehaviour
     void OnEnable()
     {
         this.text = this.GetComponent<Text>();
-        Bus.Instance.Subscribe<int>(OnEvent);
-    }
-
-    void OnDisable()
-    {
-        Bus.Instance.Unsubscribe<int>(OnEvent);
-    }
-
-    void OnEvent(int count)
-    {
-        this.text.text = count.ToString();
+        this.BindEnableTo((int count) => { this.text.text = count.ToString(); });
     }
 }
