@@ -48,4 +48,7 @@ public class EventReceiver : MonoBehavour
 }
 ```
 
+# License
+
+[MIT](./LICENSE.md)
 
