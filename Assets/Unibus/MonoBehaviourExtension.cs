@@ -7,15 +7,25 @@ namespace Unibus
     {
         public static void BindEnableEvent<T>(this MonoBehaviour mono, OnEvent<T> onEvent)
         {
-            GetOrAddComponent<T, UnibusEnableSubscriber>(mono, onEvent);
+            GetOrAddComponent<T, UnibusEnableSubscriber>(mono, Bus.DefaultTag, onEvent);
+        }
+
+        public static void BindEnableEvent<T>(this MonoBehaviour mono, object tag, OnEvent<T> onEvent)
+        {
+            GetOrAddComponent<T, UnibusEnableSubscriber>(mono, tag, onEvent);
         }
 
         public static void BindDestroyEvent<T>(this MonoBehaviour mono, OnEvent<T> onEvent)
         {
-            GetOrAddComponent<T, UnibusSustainSubscriber>(mono, onEvent);
+            GetOrAddComponent<T, UnibusSustainSubscriber>(mono, Bus.DefaultTag, onEvent);
         }
 
-        private static void GetOrAddComponent<T, S>(MonoBehaviour mono, OnEvent<T> onEvent) where S : UnibusSubscriberBase
+        public static void BindDestroyEvent<T>(this MonoBehaviour mono, object tag, OnEvent<T> onEvent)
+        {
+            GetOrAddComponent<T, UnibusSustainSubscriber>(mono, tag, onEvent);
+        }
+
+        private static void GetOrAddComponent<T, S>(MonoBehaviour mono, object tag, OnEvent<T> onEvent) where S : UnibusSubscriberBase
         {
             var component = mono.GetComponent<S>();
 
@@ -24,7 +34,7 @@ namespace Unibus
                 component = mono.gameObject.AddComponent<S>();
             }
 
-            component.SetSubscribeCaller(onEvent);
+            component.SetSubscribeCaller(tag, onEvent);
         }
     }
 }

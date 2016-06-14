@@ -8,41 +8,86 @@ namespace Unibus
     public delegate void OnEvent<T>(T action);
     public delegate void OnEventWrapper(object _object);
 
-    public class Bus : SingletonMonoBehaviour<Bus>
+    class DictionaryKey
     {
-        private Dictionary<Type, Dictionary<int, OnEventWrapper>> observerDictionary = new Dictionary<Type, Dictionary<int, OnEventWrapper>>();
+        public Type Type;
+        public object Tag;
 
-        public void Subscribe<T>(OnEvent<T> eventCallback)
+        public DictionaryKey(object tag, Type type)
         {
-            Type type = typeof(T);
+            this.Tag = tag;
+            this.Type = type;
+        }
 
-            if (!observerDictionary.ContainsKey(type))
+        public override int GetHashCode()
+        {
+            return this.Tag.GetHashCode() ^ this.Type.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is DictionaryKey)
             {
-                observerDictionary[type] = new Dictionary<int, OnEventWrapper>();
+                var key = (DictionaryKey)obj;
+                return this.Tag.Equals(key.Tag) && this.Type.Equals(key.Type);
             }
 
-            observerDictionary[type][eventCallback.GetHashCode()] = (object _object) => {
+            return false;
+        }
+    }
+
+    public class Bus : SingletonMonoBehaviour<Bus>
+    {
+        public const string DefaultTag = "default";
+        private Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>> observerDictionary = new Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>>();
+
+        public void Subscribe<T>(OnEvent<T> eventCallback) 
+        {
+            this.Subscribe(DefaultTag, eventCallback);
+        }
+
+        public void Subscribe<T>(object tag, OnEvent<T> eventCallback)
+        {
+            var key = new DictionaryKey(tag, typeof(T));
+
+            if (!observerDictionary.ContainsKey(key))
+            {
+                observerDictionary[key] = new Dictionary<int, OnEventWrapper>();
+            }
+
+            observerDictionary[key][eventCallback.GetHashCode()] = (object _object) =>
+            {
                 eventCallback((T)_object);
             };
         }
 
         public void Unsubscribe<T>(OnEvent<T> eventCallback)
         {
-            Type type = typeof(T);
+            this.Unsubscribe(DefaultTag, eventCallback);
+        }
 
-            if (observerDictionary[type] != null)
+        public void Unsubscribe<T>(object tag, OnEvent<T> eventCallback)
+        {
+            var key = new DictionaryKey(tag, typeof(T));
+
+            if (observerDictionary[key] != null)
             {
-                observerDictionary[type].Remove(eventCallback.GetHashCode());
+                observerDictionary[key].Remove(eventCallback.GetHashCode());
             }
         }
 
         public void Dispatch<T>(T action)
         {
-            Type type = typeof(T);
+            this.Dispatch(DefaultTag, action);
+        }
 
-            if (observerDictionary.ContainsKey(type))
+        public void Dispatch<T>(object tag, T action)
+        {
+            var key = new DictionaryKey(tag, typeof(T));
+
+            if (observerDictionary.ContainsKey(key))
             {
-                foreach(var caller in observerDictionary[type].Values)
+                foreach (var caller in observerDictionary[key].Values)
                 {
                     caller(action);
                 }
