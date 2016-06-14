@@ -3,6 +3,10 @@
 Unibus is event passing system for Unity3D.
 It is inspired by EventBus.
 
+# Install
+
+Download [Unibus-v0.0.1.unitypackage](https://github.com/mattak/Unibus/releases/download/0.0.1/Unibus-v0.0.1.unitypackage)
+
 # Usage
 
 Implement two class, receiver and sender.
