@@ -62,6 +62,36 @@ public class EventReceiver : MonoBehavour
 }
 ```
 
+## Sending Object
+
+You can send any type of object.
+
+```
+// Subscribe
+Bus.Instance.AddEnableTo((int value) => {});
+Bus.Instance.AddEnableTo((string value) => {});
+Bus.Instance.AddEnableTo((Person value) => {});
+
+// Dispatch
+Bus.Instance.Dispatch(0);
+Bus.Instance.Dispatch("message");
+Bus.Instance.Dispatch(new Person("john", "due"));
+```
+
+## Tagging
+
+You can divide same type of object event with attaching tag.
+
+```
+// Subscribe
+Bus.Instance.AddEnableTo("HP", (int value) => {});
+Bus.Instance.AddEnableTo("MP", (int value) => {});
+
+// Dispatch
+Bus.Instance.Dispatch("HP", 100);
+Bus.Instance.Dispatch("MP", 200);
+```
+
 # License
 
 [MIT](./LICENSE.md)
