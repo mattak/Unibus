@@ -5,11 +5,12 @@ using Unibus;
 
 public class ObserverText : MonoBehaviour
 {
-    private Text text;
+    public string Tag = "Count";
+    private Text Text;
 
     void OnEnable()
     {
-        this.text = this.GetComponent<Text>();
-        this.BindEnableEvent((int count) => { this.text.text = count.ToString(); });
+        this.Text = this.GetComponent<Text>();
+        this.BindEnableEvent(Tag, (int count) => { this.Text.text = count.ToString(); });
     }
 }
