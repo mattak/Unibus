@@ -3,6 +3,13 @@
 Unibus is event passing system for Unity3D.
 It is inspired by EventBus.
 
+# Why Unibus?
+
+Unity is great framework for creating game, but there is no standard event passing system.
+For example in GameJam, there is no time to implement and need to write so many singleton.
+So I create instant event passing system.
+It's easy to use, thin dependency, flexible to fit any type of message.
+
 # Install
 
 Download [Unibus-v0.0.1.unitypackage](https://github.com/mattak/Unibus/releases/download/0.0.1/Unibus-v0.0.1.unitypackage)
