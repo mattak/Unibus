@@ -6,8 +6,11 @@ It is inspired by EventBus.
 # Why Unibus?
 
 Unity is great framework for creating game, but there is no standard event passing system.
+
 For example in GameJam, there is no time to implement and need to write so many singleton.
+
 So I create instant event passing system.
+
 It's easy to use, thin dependency, flexible to fit any type of message.
 
 # Install
@@ -59,7 +62,7 @@ public class EventReceiver : MonoBehavour
 }
 ```
 
-or you can just simple style render.
+or you can use simple style render.
 
 ```
 using Unibus;
@@ -75,7 +78,7 @@ public class EventReceiver : MonoBehavour
 
 ## Sending Object
 
-You can send any type of object.
+It's able to send any type of object.
 
 ```
 // Subscribe
@@ -91,7 +94,7 @@ Bus.Instance.Dispatch(new Person("john", "due"));
 
 ## Tagging
 
-You can divide same type of object event with attaching tag.
+Divide same type of object event by attaching tag.
 
 ```
 // Subscribe
