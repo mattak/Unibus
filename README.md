@@ -21,29 +21,40 @@ Download [Unibus-v0.0.1.unitypackage](https://github.com/mattak/Unibus/releases/
 
 # Usage
 
-Implement two class, receiver and sender.
+## 1. place bus object
 
-EventSender.cs
+Place gameobject and attach `Bus.cs` script.
+It will be singleton to refer event.
+
+![Usage attach script](./art/usage_attach_gameobject.png)
+
+Then it's ready to use.
+
+## 2. Implement event sender
+
+Send any event what you want such as `SampleEventSender.cs` .
 
 ```
 using Unibus;
 
-public class EventSender : MonoBehaviour
+public class SampleEventSender : MonoBehaviour
 {
     void OnClick()
     {
-        // Send string Event
+        // Send string message
         Bus.Instance.Dispatch("message");
     }
 }
 ```
 
-EventReceiver.cs
+## 3. Implement event receiver
+
+Receive sent message such as `SampleEventReceiver.cs` .
 
 ```
 using Unibus;
 
-public class EventReceiver : MonoBehavour
+public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
@@ -64,16 +75,17 @@ public class EventReceiver : MonoBehavour
 }
 ```
 
-or you can use simple style render.
+Or you can use simple style subscriber.
+`AddEnableTo()` is shortcut to unsubscribe automatically when gameobject reach `onDisable()`.
 
 ```
 using Unibus;
 
-public class EventReceiver : MonoBehavour
+public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
-        Bus.Instance.AdddEnableTo((string message) => { this.GetComponent<Text>().text = message; });
+        Bus.Instance.AddEnableTo((string message) => { this.GetComponent<Text>().text = message; });
     }
 }
 ```
