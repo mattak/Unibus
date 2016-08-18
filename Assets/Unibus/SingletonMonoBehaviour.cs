@@ -12,7 +12,7 @@ namespace Unibus
             {
                 if (instance == null)
                 {
-                    instance = (T) FindObjectOfType(typeof(T));
+                    instance = (T)FindObjectOfType(typeof(T));
 
                     if (instance == null)
                     {
@@ -33,7 +33,7 @@ namespace Unibus
         {
             if (instance == null)
             {
-                instance = (T) this;
+                instance = (T)this;
                 return true;
             }
             else if (Instance == this)
@@ -43,6 +43,11 @@ namespace Unibus
 
             Destroy(this);
             return false;
+        }
+
+        public static bool IsExistInstance()
+        {
+            return instance != null;
         }
     }
 }

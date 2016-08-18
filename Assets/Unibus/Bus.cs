@@ -5,93 +5,36 @@ using System.Collections.Generic;
 
 namespace Unibus
 {
-    public delegate void OnEvent<T>(T action);
-    public delegate void OnEventWrapper(object _object);
-
-    class DictionaryKey
+    public static class Bus
     {
-        public Type Type;
-        public object Tag;
-
-        public DictionaryKey(object tag, Type type)
+        public static void Subscribe<T>(OnEvent<T> eventCallback)
         {
-            this.Tag = tag;
-            this.Type = type;
+            BusObject.Instance.Subscribe<T>(eventCallback);
         }
 
-        public override int GetHashCode()
+        public static void Subscribe<T>(object tag, OnEvent<T> eventCallback)
         {
-            return this.Tag.GetHashCode() ^ this.Type.GetHashCode();
+            BusObject.Instance.Subscribe<T>(tag, eventCallback);
         }
 
-        public override bool Equals(object obj)
+        public static void Unsubscribe<T>(OnEvent<T> eventCallback)
         {
-            if (obj is DictionaryKey)
-            {
-                var key = (DictionaryKey)obj;
-                return this.Tag.Equals(key.Tag) && this.Type.Equals(key.Type);
-            }
-
-            return false;
-        }
-    }
-
-    public class Bus : SingletonMonoBehaviour<Bus>
-    {
-        public const string DefaultTag = "default";
-        private Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>> observerDictionary = new Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>>();
-
-        public void Subscribe<T>(OnEvent<T> eventCallback) 
-        {
-            this.Subscribe(DefaultTag, eventCallback);
+            BusObject.Instance.Unsubscribe<T>(BusObject.DefaultTag, eventCallback);
         }
 
-        public void Subscribe<T>(object tag, OnEvent<T> eventCallback)
+        public static void Unsubscribe<T>(object tag, OnEvent<T> eventCallback)
         {
-            var key = new DictionaryKey(tag, typeof(T));
-
-            if (!observerDictionary.ContainsKey(key))
-            {
-                observerDictionary[key] = new Dictionary<int, OnEventWrapper>();
-            }
-
-            observerDictionary[key][eventCallback.GetHashCode()] = (object _object) =>
-            {
-                eventCallback((T)_object);
-            };
+            BusObject.Instance.Unsubscribe<T>(tag, eventCallback);
         }
 
-        public void Unsubscribe<T>(OnEvent<T> eventCallback)
+        public static void Dispatch<T>(T action)
         {
-            this.Unsubscribe(DefaultTag, eventCallback);
+            BusObject.Instance.Dispatch(BusObject.DefaultTag, action);
         }
 
-        public void Unsubscribe<T>(object tag, OnEvent<T> eventCallback)
+        public static void Dispatch<T>(object tag, T action)
         {
-            var key = new DictionaryKey(tag, typeof(T));
-
-            if (observerDictionary[key] != null)
-            {
-                observerDictionary[key].Remove(eventCallback.GetHashCode());
-            }
-        }
-
-        public void Dispatch<T>(T action)
-        {
-            this.Dispatch(DefaultTag, action);
-        }
-
-        public void Dispatch<T>(object tag, T action)
-        {
-            var key = new DictionaryKey(tag, typeof(T));
-
-            if (observerDictionary.ContainsKey(key))
-            {
-                foreach (var caller in observerDictionary[key].Values)
-                {
-                    caller(action);
-                }
-            }
+            BusObject.Instance.Dispatch(tag, action);
         }
     }
 }

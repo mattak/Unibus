@@ -9,17 +9,21 @@ namespace Unibus
 
         public void SetSubscribeCaller<T>(object tag, OnEvent<T> onEvent)
         {
+
             subscribeCaller = (bool active) =>
+            {
+                if (active)
                 {
-                    if (active)
+                    BusObject.Instance.Subscribe(tag, onEvent);
+                }
+                else
+                {
+                    if (BusObject.IsExistInstance())
                     {
-                        Unibus.Bus.Instance.Subscribe(tag, onEvent);
+                        BusObject.Instance.Unsubscribe(tag, onEvent);
                     }
-                    else
-                    {
-                        Unibus.Bus.Instance.Unsubscribe(tag, onEvent);
-                    }
-                };
+                }
+            };
 
             subscribeCaller(true);
         }
