@@ -12,8 +12,9 @@ public class DispatcherButton : MonoBehaviour
         var count = 0;
         var button = this.GetComponent<Button>();
 
-        button.onClick.AddListener(() => {
-            Bus.Instance.Dispatch(Tag, count++);
-        });
+        button.onClick.AddListener(() =>
+            {
+                Bus.Dispatch(Tag, count++);
+            });
     }
 }
