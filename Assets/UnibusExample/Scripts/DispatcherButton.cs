@@ -14,7 +14,7 @@ public class DispatcherButton : MonoBehaviour
 
         button.onClick.AddListener(() =>
             {
-                Bus.Dispatch(Tag, count++);
+                UnibusEvent.Dispatch(Tag, count++);
             });
     }
 }

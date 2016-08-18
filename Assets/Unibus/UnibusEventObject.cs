@@ -36,7 +36,7 @@ namespace Unibus
         }
     }
 
-    public class BusObject : SingletonMonoBehaviour<BusObject>
+    public class UnibusEventObject : SingletonMonoBehaviour<UnibusEventObject>
     {
         public const string DefaultTag = "default";
         private Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>> observerDictionary = new Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>>();
