@@ -14,13 +14,13 @@ namespace Unibus
             {
                 if (active)
                 {
-                    BusObject.Instance.Subscribe(tag, onEvent);
+                    UnibusEventObject.Instance.Subscribe(tag, onEvent);
                 }
                 else
                 {
-                    if (BusObject.IsExistInstance())
+                    if (UnibusEventObject.IsExistInstance())
                     {
-                        BusObject.Instance.Unsubscribe(tag, onEvent);
+                        UnibusEventObject.Instance.Unsubscribe(tag, onEvent);
                     }
                 }
             };

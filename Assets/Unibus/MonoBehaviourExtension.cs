@@ -7,7 +7,7 @@ namespace Unibus
     {
         public static void BindEnableEvent<T>(this MonoBehaviour mono, OnEvent<T> onEvent)
         {
-            GetOrAddComponent<T, UnibusEnableSubscriber>(mono, BusObject.DefaultTag, onEvent);
+            GetOrAddComponent<T, UnibusEnableSubscriber>(mono, UnibusEventObject.DefaultTag, onEvent);
         }
 
         public static void BindEnableEvent<T>(this MonoBehaviour mono, object tag, OnEvent<T> onEvent)
@@ -17,7 +17,7 @@ namespace Unibus
 
         public static void BindDestroyEvent<T>(this MonoBehaviour mono, OnEvent<T> onEvent)
         {
-            GetOrAddComponent<T, UnibusSustainSubscriber>(mono, BusObject.DefaultTag, onEvent);
+            GetOrAddComponent<T, UnibusSustainSubscriber>(mono, UnibusEventObject.DefaultTag, onEvent);
         }
 
         public static void BindDestroyEvent<T>(this MonoBehaviour mono, object tag, OnEvent<T> onEvent)
