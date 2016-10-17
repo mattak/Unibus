@@ -58,12 +58,12 @@ public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
-        Bus.Instance.Subscribe(OnEvent);
+        Bus.Instance.Subscribe<string>(OnEvent);
     }
 
     void OnDisable()
     {
-        Bus.Instance.Unsubscribe(OnEvent);
+        Bus.Instance.Unsubscribe<string>(OnEvent);
     }
 
     // This is receiver 
