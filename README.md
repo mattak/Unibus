@@ -34,7 +34,7 @@ Then it's ready to use.
 
 Send any event what you want such as `SampleEventSender.cs` .
 
-```
+```csharp
 using Unibus;
 
 public class SampleEventSender : MonoBehaviour
@@ -51,7 +51,7 @@ public class SampleEventSender : MonoBehaviour
 
 Receive sent message such as `SampleEventReceiver.cs` .
 
-```
+```csharp
 using Unibus;
 
 public class SampleEventReceiver : MonoBehavour
@@ -78,7 +78,7 @@ public class SampleEventReceiver : MonoBehavour
 Or you can use simple style subscriber.
 `AddEnableTo()` is shortcut to unsubscribe automatically when gameobject reach `onDisable()`.
 
-```
+```csharp
 using Unibus;
 
 public class SampleEventReceiver : MonoBehavour
@@ -94,7 +94,7 @@ public class SampleEventReceiver : MonoBehavour
 
 It's able to send any type of object.
 
-```
+```csharp
 // Subscribe
 Bus.Instance.AddEnableTo((int value) => {});
 Bus.Instance.AddEnableTo((string value) => {});
@@ -110,7 +110,7 @@ Bus.Instance.Dispatch(new Person("john", "due"));
 
 Divide same type of object event by attaching tag.
 
-```
+```csharp
 // Subscribe
 Bus.Instance.AddEnableTo("HP", (int value) => {});
 Bus.Instance.AddEnableTo("MP", (int value) => {});
