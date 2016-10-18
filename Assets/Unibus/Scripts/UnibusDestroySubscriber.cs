@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Unibus
 {
-    public class UnibusSustainSubscriber : UnibusSubscriberBase
+    public class UnibusDestroySubscriber : UnibusSubscriberBase
     {
         void Awake()
         {

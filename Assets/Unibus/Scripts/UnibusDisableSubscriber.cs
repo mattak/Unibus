@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Unibus
 {
-    public class UnibusEnableSubscriber : UnibusSubscriberBase
+    public class UnibusDisableSubscriber : UnibusSubscriberBase
     {
         void OnEnable()
         {

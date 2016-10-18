@@ -12,9 +12,9 @@ public class DispatcherButton : MonoBehaviour
         var count = 0;
         var button = this.GetComponent<Button>();
 
-        button.onClick.AddListener(() =>
-            {
-                UnibusEvent.Dispatch(Tag, count++);
-            });
+        button.onClick.AddListener(() => UnibusEvent.Dispatch(Tag, ++count));
+
+        // Initial rendering
+        UnibusEvent.Dispatch(Tag, count);
     }
 }

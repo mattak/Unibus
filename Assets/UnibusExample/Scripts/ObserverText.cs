@@ -11,6 +11,9 @@ public class ObserverText : MonoBehaviour
     void OnEnable()
     {
         this.Text = this.GetComponent<Text>();
-        this.BindEnableEvent(Tag, (int count) => { this.Text.text = count.ToString(); });
+        this.BindUntilDisable(Tag, (int count) =>
+            {
+                this.Text.text = count.ToString();
+            });
     }
 }
