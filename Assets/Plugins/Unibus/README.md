@@ -23,10 +23,10 @@ Download [Unibus-v0.0.1.unitypackage](https://github.com/mattak/Unibus/releases/
 
 ## 1. place bus object
 
-Place gameobject and attach `Bus.cs` script.
-It will be singleton to refer event.
+Place `Unibus` prefab object into your scene.
+It will be singleton to handle event.
 
-![Usage attach script](./art/usage_attach_gameobject.png)
+![Place Unibus prefab](./art/place_unibus_prefab.png)
 
 Then it's ready to use.
 
@@ -42,7 +42,7 @@ public class SampleEventSender : MonoBehaviour
     void OnClick()
     {
         // Send string message
-        Bus.Instance.Dispatch("message");
+        UnibusEvent.Dispatch("message");
     }
 }
 ```
@@ -58,15 +58,15 @@ public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
-        Bus.Instance.Subscribe<string>(OnEvent);
+        UnibusEvent.Subscribe<string>(OnEvent);
     }
 
     void OnDisable()
     {
-        Bus.Instance.Unsubscribe<string>(OnEvent);
+        UnibusEvent.Unsubscribe<string>(OnEvent);
     }
 
-    // This is receiver 
+    // This is receiver
     void OnEvent(string message)
     {
         var text = this.GetComponent<Text>();
@@ -76,7 +76,7 @@ public class SampleEventReceiver : MonoBehavour
 ```
 
 Or you can use simple style subscriber.
-`AddEnableTo()` is shortcut to unsubscribe automatically when gameobject reach `onDisable()`.
+`BindUntilDisable()` is shortcut to unsubscribe automatically when gameobject reach `onDisable()`.
 
 ```csharp
 using Unibus;
@@ -85,7 +85,7 @@ public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
-        Bus.Instance.AddEnableTo((string message) => { this.GetComponent<Text>().text = message; });
+        UnibusEvent.BindUntilDisable((string message) => { this.GetComponent<Text>().text = message; });
     }
 }
 ```
@@ -96,14 +96,14 @@ It's able to send any type of object.
 
 ```csharp
 // Subscribe
-Bus.Instance.AddEnableTo((int value) => {});
-Bus.Instance.AddEnableTo((string value) => {});
-Bus.Instance.AddEnableTo((Person value) => {});
+UnibusEvent.BindUntilDisable((int value) => {});
+UnibusEvent.BindUntilDisable((string value) => {});
+UnibusEvent.BindUntilDisable((Person value) => {});
 
 // Dispatch
-Bus.Instance.Dispatch(0);
-Bus.Instance.Dispatch("message");
-Bus.Instance.Dispatch(new Person("john", "due"));
+UnibusEvent.Dispatch(0);
+UnibusEvent.Dispatch("message");
+UnibusEvent.Dispatch(new Person("john", "due"));
 ```
 
 ## Tagging
@@ -112,12 +112,12 @@ Divide same type of object event by attaching tag.
 
 ```csharp
 // Subscribe
-Bus.Instance.AddEnableTo("HP", (int value) => {});
-Bus.Instance.AddEnableTo("MP", (int value) => {});
+UnibusEvent.BindUntilDisable("HP", (int value) => {});
+UnibusEvent.BindUntilDisable("MP", (int value) => {});
 
 // Dispatch
-Bus.Instance.Dispatch("HP", 100);
-Bus.Instance.Dispatch("MP", 200);
+UnibusEvent.Dispatch("HP", 100);
+UnibusEvent.Dispatch("MP", 200);
 ```
 
 # License
