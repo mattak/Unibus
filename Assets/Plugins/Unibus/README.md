@@ -3,6 +3,7 @@
 ![Unibus](./art/unibus.png)
 
 Unibus is event passing system for Unity3D.
+
 It is inspired by EventBus.
 
 # Why Unibus?
@@ -15,13 +16,25 @@ So I create instant event passing system.
 
 It's easy to use, thin dependency, flexible to fit any type of message.
 
+# Architecture
+
+![Unibus](./art/unibus_message_passing.png)
+
+Unibus is singleton GameObject.
+
+It manages receivers and delivers messages. 
+
+The message is classified by tag and type.
+
+For example, if you dispatch with `HP` tag and `int` type, then receivers subscribing 'HP' tag and 'int' type can only receives the dispatched value.
+
 # Install
 
 Download [Unibus-v0.0.1.unitypackage](https://github.com/mattak/Unibus/releases/download/0.0.1/Unibus-v0.0.1.unitypackage)
 
 # Usage
 
-## 1. place bus object
+## 1. Place Unibus object
 
 Place `Unibus` prefab object into your scene.
 It will be singleton to handle event.
