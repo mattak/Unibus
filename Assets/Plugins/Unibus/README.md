@@ -98,7 +98,7 @@ public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
-        Unibus.BindUntilDisable((string message) => { this.GetComponent<Text>().text = message; });
+        this.BindUntilDisable((string message) => { this.GetComponent<Text>().text = message; });
     }
 }
 ```
@@ -109,9 +109,9 @@ It's able to send any type of object.
 
 ```csharp
 // Subscribe
-Unibus.BindUntilDisable((int value) => {});
-Unibus.BindUntilDisable((string value) => {});
-Unibus.BindUntilDisable((Person value) => {});
+this.BindUntilDisable((int value) => {});
+this.BindUntilDisable((string value) => {});
+this.BindUntilDisable((Person value) => {});
 
 // Dispatch
 Unibus.Dispatch(0);
@@ -125,8 +125,8 @@ Divide same type of object event by attaching tag.
 
 ```csharp
 // Subscribe
-Unibus.BindUntilDisable("HP", (int value) => {});
-Unibus.BindUntilDisable("MP", (int value) => {});
+this.BindUntilDisable("HP", (int value) => {});
+this.BindUntilDisable("MP", (int value) => {});
 
 // Dispatch
 Unibus.Dispatch("HP", 100);
