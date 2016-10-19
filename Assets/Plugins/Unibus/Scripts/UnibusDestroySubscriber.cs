@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-namespace Unibus
+namespace UnibusEvent
 {
     public class UnibusDestroySubscriber : UnibusSubscriberBase
     {

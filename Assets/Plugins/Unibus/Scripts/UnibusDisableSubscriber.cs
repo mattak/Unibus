@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-namespace Unibus
+namespace UnibusEvent
 {
     public class UnibusDisableSubscriber : UnibusSubscriberBase
     {

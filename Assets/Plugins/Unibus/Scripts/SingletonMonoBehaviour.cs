@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unibus
+namespace UnibusEvent
 {
     public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBehaviour<T>
     {

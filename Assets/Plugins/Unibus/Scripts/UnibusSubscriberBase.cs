@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace Unibus
+namespace UnibusEvent
 {
     public class UnibusSubscriberBase : MonoBehaviour
     {
@@ -14,13 +14,13 @@ namespace Unibus
             {
                 if (active)
                 {
-                    UnibusEventObject.Instance.Subscribe(tag, onEvent);
+                    UnibusObject.Instance.Subscribe(tag, onEvent);
                 }
                 else
                 {
-                    if (UnibusEventObject.IsExistInstance())
+                    if (UnibusObject.IsExistInstance())
                     {
-                        UnibusEventObject.Instance.Unsubscribe(tag, onEvent);
+                        UnibusObject.Instance.Unsubscribe(tag, onEvent);
                     }
                 }
             };

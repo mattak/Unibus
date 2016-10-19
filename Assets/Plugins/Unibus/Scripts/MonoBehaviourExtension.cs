@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Unibus
+namespace UnibusEvent
 {
     public static class MonoBehaviourExtension
     {
         public static void BindUntilDisable<T>(this MonoBehaviour mono, OnEvent<T> onEvent)
         {
-            GetOrAddComponent<T, UnibusDisableSubscriber>(mono, UnibusEventObject.DefaultTag, onEvent);
+            GetOrAddComponent<T, UnibusDisableSubscriber>(mono, UnibusObject.DefaultTag, onEvent);
         }
 
         public static void BindUntilDisable<T>(this MonoBehaviour mono, object tag, OnEvent<T> onEvent)
@@ -17,7 +17,7 @@ namespace Unibus
 
         public static void BindUntilDestroy<T>(this MonoBehaviour mono, OnEvent<T> onEvent)
         {
-            GetOrAddComponent<T, UnibusDestroySubscriber>(mono, UnibusEventObject.DefaultTag, onEvent);
+            GetOrAddComponent<T, UnibusDestroySubscriber>(mono, UnibusObject.DefaultTag, onEvent);
         }
 
         public static void BindUntilDestroy<T>(this MonoBehaviour mono, object tag, OnEvent<T> onEvent)

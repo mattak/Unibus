@@ -3,38 +3,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Unibus
+namespace UnibusEvent
 {
-    public static class UnibusEvent
+    public static class Unibus
     {
         public static void Subscribe<T>(OnEvent<T> eventCallback)
         {
-            UnibusEventObject.Instance.Subscribe<T>(eventCallback);
+            UnibusObject.Instance.Subscribe<T>(eventCallback);
         }
 
         public static void Subscribe<T>(object tag, OnEvent<T> eventCallback)
         {
-            UnibusEventObject.Instance.Subscribe<T>(tag, eventCallback);
+            UnibusObject.Instance.Subscribe<T>(tag, eventCallback);
         }
 
         public static void Unsubscribe<T>(OnEvent<T> eventCallback)
         {
-            UnibusEventObject.Instance.Unsubscribe<T>(UnibusEventObject.DefaultTag, eventCallback);
+            UnibusObject.Instance.Unsubscribe<T>(UnibusObject.DefaultTag, eventCallback);
         }
 
         public static void Unsubscribe<T>(object tag, OnEvent<T> eventCallback)
         {
-            UnibusEventObject.Instance.Unsubscribe<T>(tag, eventCallback);
+            UnibusObject.Instance.Unsubscribe<T>(tag, eventCallback);
         }
 
         public static void Dispatch<T>(T action)
         {
-            UnibusEventObject.Instance.Dispatch(UnibusEventObject.DefaultTag, action);
+            UnibusObject.Instance.Dispatch(UnibusObject.DefaultTag, action);
         }
 
         public static void Dispatch<T>(object tag, T action)
         {
-            UnibusEventObject.Instance.Dispatch(tag, action);
+            UnibusObject.Instance.Dispatch(tag, action);
         }
     }
 }
