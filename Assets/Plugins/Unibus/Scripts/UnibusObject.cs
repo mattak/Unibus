@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Unibus
+namespace UnibusEvent
 {
     public delegate void OnEvent<T>(T action);
     public delegate void OnEventWrapper(object _object);
@@ -36,7 +36,7 @@ namespace Unibus
         }
     }
 
-    public class UnibusEventObject : SingletonMonoBehaviour<UnibusEventObject>
+    public class UnibusObject : SingletonMonoBehaviour<UnibusObject>
     {
         public const string DefaultTag = "default";
         private Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>> observerDictionary = new Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>>();
