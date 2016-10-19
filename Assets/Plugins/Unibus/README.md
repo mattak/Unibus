@@ -48,14 +48,14 @@ Then it's ready to use.
 Send any event what you want such as `SampleEventSender.cs` .
 
 ```csharp
-using Unibus;
+using UnibusEvent;
 
 public class SampleEventSender : MonoBehaviour
 {
     void OnClick()
     {
         // Send string message
-        UnibusEvent.Dispatch("message");
+        Unibus.Dispatch("message");
     }
 }
 ```
@@ -65,18 +65,18 @@ public class SampleEventSender : MonoBehaviour
 Receive sent message such as `SampleEventReceiver.cs` .
 
 ```csharp
-using Unibus;
+using UnibusEvent;
 
 public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
-        UnibusEvent.Subscribe<string>(OnEvent);
+        Unibus.Subscribe<string>(OnEvent);
     }
 
     void OnDisable()
     {
-        UnibusEvent.Unsubscribe<string>(OnEvent);
+        Unibus.Unsubscribe<string>(OnEvent);
     }
 
     // This is receiver
@@ -92,13 +92,13 @@ Or you can use simple style subscriber.
 `BindUntilDisable()` is shortcut to unsubscribe automatically when gameobject reach `onDisable()`.
 
 ```csharp
-using Unibus;
+using UnibusEvent;
 
 public class SampleEventReceiver : MonoBehavour
 {
     void OnEnable()
     {
-        UnibusEvent.BindUntilDisable((string message) => { this.GetComponent<Text>().text = message; });
+        Unibus.BindUntilDisable((string message) => { this.GetComponent<Text>().text = message; });
     }
 }
 ```
@@ -109,14 +109,14 @@ It's able to send any type of object.
 
 ```csharp
 // Subscribe
-UnibusEvent.BindUntilDisable((int value) => {});
-UnibusEvent.BindUntilDisable((string value) => {});
-UnibusEvent.BindUntilDisable((Person value) => {});
+Unibus.BindUntilDisable((int value) => {});
+Unibus.BindUntilDisable((string value) => {});
+Unibus.BindUntilDisable((Person value) => {});
 
 // Dispatch
-UnibusEvent.Dispatch(0);
-UnibusEvent.Dispatch("message");
-UnibusEvent.Dispatch(new Person("john", "due"));
+Unibus.Dispatch(0);
+Unibus.Dispatch("message");
+Unibus.Dispatch(new Person("john", "due"));
 ```
 
 ## Tagging
@@ -125,12 +125,12 @@ Divide same type of object event by attaching tag.
 
 ```csharp
 // Subscribe
-UnibusEvent.BindUntilDisable("HP", (int value) => {});
-UnibusEvent.BindUntilDisable("MP", (int value) => {});
+Unibus.BindUntilDisable("HP", (int value) => {});
+Unibus.BindUntilDisable("MP", (int value) => {});
 
 // Dispatch
-UnibusEvent.Dispatch("HP", 100);
-UnibusEvent.Dispatch("MP", 200);
+Unibus.Dispatch("HP", 100);
+Unibus.Dispatch("MP", 200);
 ```
 
 # License
