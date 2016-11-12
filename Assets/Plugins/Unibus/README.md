@@ -22,7 +22,7 @@ It's easy to use, thin dependency, flexible to fit any type of message.
 
 Unibus is singleton GameObject.
 
-It manages receivers and delivers to handle message. 
+It manages receivers and senders to handle message. 
 
 The message is classified by tag and type.
 
