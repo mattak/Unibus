@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace UnibusEvent
 {
     public delegate void OnEvent<T>(T action);
+
     public delegate void OnEventWrapper(object _object);
 
     class DictionaryKey
@@ -28,7 +28,7 @@ namespace UnibusEvent
         {
             if (obj is DictionaryKey)
             {
-                var key = (DictionaryKey)obj;
+                var key = (DictionaryKey) obj;
                 return this.Tag.Equals(key.Tag) && this.Type.Equals(key.Type);
             }
 
@@ -39,7 +39,9 @@ namespace UnibusEvent
     public class UnibusObject : SingletonMonoBehaviour<UnibusObject>
     {
         public const string DefaultTag = "default";
-        private Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>> observerDictionary = new Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>>();
+
+        private Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>> observerDictionary =
+            new Dictionary<DictionaryKey, Dictionary<int, OnEventWrapper>>();
 
         public void Subscribe<T>(OnEvent<T> eventCallback)
         {
@@ -55,10 +57,7 @@ namespace UnibusEvent
                 observerDictionary[key] = new Dictionary<int, OnEventWrapper>();
             }
 
-            observerDictionary[key][eventCallback.GetHashCode()] = (object _object) =>
-            {
-                eventCallback((T)_object);
-            };
+            observerDictionary[key][eventCallback.GetHashCode()] = (object _object) => { eventCallback((T) _object); };
         }
 
         public void Unsubscribe<T>(OnEvent<T> eventCallback)
@@ -91,6 +90,11 @@ namespace UnibusEvent
                 {
                     caller(action);
                 }
+            }
+            else
+            {
+                string tagAndAction = string.Format("(tag:{0}, action:{1})", tag, action);
+                Debug.LogWarning("Unibus.Dispatch failed to send: " + tagAndAction);
             }
         }
     }
