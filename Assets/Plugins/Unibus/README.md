@@ -10,7 +10,7 @@ It is inspired by EventBus.
 
 Unity is great framework for creating game, but there is no standard event passing system.
 
-For example in GameJam, there is no time to implement and need to write so many singleton.
+For example in GameJam, there is no time to solve GameObject dependencies and create so many callback.
 
 So I create instant event passing system.
 
@@ -22,11 +22,11 @@ It's easy to use, thin dependency, flexible to fit any type of message.
 
 Unibus is singleton GameObject.
 
-It manages receivers and delivers messages. 
+It manages receivers and delivers to handle message. 
 
 The message is classified by tag and type.
 
-For example, if you dispatch with `HP` tag and `int` type, then receivers subscribing `HP` tag and `int` type can only receives the dispatched value.
+For example, if you dispatch message with `HP` tag and `int` type, then receivers subscribing `HP` tag and `int` type can only receives the dispatched value.
 
 # Install
 
