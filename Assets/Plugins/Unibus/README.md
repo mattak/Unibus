@@ -45,7 +45,7 @@ Then it's ready to use.
 
 ## 2. Implement event sender
 
-Send any event what you want such as `SampleEventSender.cs` .
+Send any event what you want.
 
 ```csharp
 using UnibusEvent;
@@ -62,7 +62,7 @@ public class SampleEventSender : MonoBehaviour
 
 ## 3. Implement event receiver
 
-Receive sent message such as `SampleEventReceiver.cs` .
+Receive sent message.
 
 ```csharp
 using UnibusEvent;
