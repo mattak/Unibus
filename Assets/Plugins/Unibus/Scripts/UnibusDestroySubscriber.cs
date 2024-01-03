@@ -6,7 +6,7 @@ namespace UnibusEvent
 {
     public class UnibusDestroySubscriber : UnibusSubscriberBase
     {
-        void Awake()
+        private void Awake()
         {
             if (subscribeCaller != null)
             {
@@ -14,7 +14,7 @@ namespace UnibusEvent
             }
         }
 
-        void Destroy()
+        private void OnDestroy()
         {
             if (subscribeCaller != null)
             {
