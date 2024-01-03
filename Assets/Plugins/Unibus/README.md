@@ -30,7 +30,15 @@ For example, if you dispatch message with `HP` tag and `int` type, then receiver
 
 # Install
 
-Download [Unibus-v1.0.1.unitypackage](https://github.com/mattak/Unibus/releases/download/1.0.1/Unibus-v1.0.1.unitypackage)
+Install from UPM
+
+```
+{
+  "dependencies": {
+    "me.mattak.unibus": "https://github.com/mattak/Unibus.git?path=Assets/Plugins/Unibus"
+   }
+}
+```
 
 # Usage
 

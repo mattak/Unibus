@@ -1,3 +1,14 @@
+# 1.0.2 (2024-01-03)
+
+Features:
+
+- #23 Bump up unity version to 2022.x
+- #25 Support upm
+
+Bugs:
+
+- #21 UnibusDestroySubscriber used wrong mono event?
+
 # 1.0.1 (2016-11-12)
 
 Features:
