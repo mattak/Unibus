@@ -1,0 +1,13 @@
+{
+  "name": "me.mattak.unibus",
+  "displayName": "Unidux",
+  "version": "1.0.2",
+  "unity": "2022.3",
+  "description": "Event passing system for Unity",
+  "license": "MIT",
+  "author": {
+    "name": "Takuma Maruyama"
+  },
+  "dependencies": {
+  }
+}
